@@ -1,0 +1,16 @@
+sequenceDiagram
+    participant Usuario
+    participant Navegador
+    participant Servidor as https://studies.cs.helsinki.fi
+
+    Usuario->>Navegador: Escribe nueva nota y hace clic en "Guardar"
+    
+    Note over Navegador: La SPA maneja el evento sin recargar la página
+    
+    Navegador->>Servidor: POST /exampleapp/spa/new_note_spa<br/>(JSON con contenido de la nota)
+    
+    Servidor-->>Navegador: Respuesta 201 Created (o 200 OK)<br/>(sin redirigir, solo confirma)
+    
+    Note over Navegador: Actualiza la lista de notas localmente<br/>y la re-renderiza con la nueva nota
+    
+    Navegador-->>Usuario: Muestra la nueva nota en la lista<br/>sin recargar la página
